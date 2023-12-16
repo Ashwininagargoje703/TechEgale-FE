@@ -1,0 +1,129 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background-color: rgb(248, 234, 205);
+  margin: 0 auto;
+  width: 370px;
+}
+
+.logo-wrapper {
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.button-container {
+  display: grid;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.primary-button {
+  background-color: #4285f4;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.secondary-button {
+  color: #777;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.social-login {
+  text-align: center;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  padding: 20px;
+}
+.social-login p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.social-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.productCard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 20px;
+  /* background-image: url('https://m.media-amazon.com/images/I/61NTwRtdzfL._SL1500_.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+  /* background-size: cover; 
+  background-position: center;*/
+  position: relative;
+  color: white;
+  border: 1px solid whitesmoke;
+  min-height: 250px;
+  border-radius: 6px;
+  width: 150px;
+  color: black;
+
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.cardInfo {
+  position: absolute; /* Position the text absolutely within the container */
+  top: 1%; /* Center the text vertically */
+  left: 1%; /* Center the text horizontally */
+  text-align: center; /* Center-align the text */
+}
+
+.table-container {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
