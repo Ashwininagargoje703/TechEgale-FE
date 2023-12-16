@@ -42,7 +42,7 @@ const Login = () => {
     <div className="login-container">
       <div className="logo-wrapper">
         <img
-          src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fassets-global.website-files.com%2F6284afcd3c8fe34dca52d136%2F62bfd7e69c25897f423bcdac_TechEagle%2520new%2520logo.svg&tbnid=8X5zH6jYfh5VpM&vet=12ahUKEwiCqZKsv4qDAxViSGwGHZnzBnUQMygCegQIARBW..i&imgrefurl=https%3A%2F%2Fwww.techeagle.in%2F&docid=gMolb03qH0j2BM&w=143&h=81&q=tech%20eagle&ved=2ahUKEwiCqZKsv4qDAxViSGwGHZnzBnUQMygCegQIARBW"
+          src="https://res.cloudinary.com/zoominfo-com/image/upload/w_140,h_140,c_fit/techeagle.in"
           alt="Tech Eagle"
         />
       </div>
