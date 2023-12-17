@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { api_url } from "../api";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -23,15 +24,12 @@ const MyOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(
-        "https://techegle-production.up.railway.app//orders/getMyOrders",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${api_url}/orders/getMyOrders`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.data && response.data.data) {
         setOrders(response.data.data);

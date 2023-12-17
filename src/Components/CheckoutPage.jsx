@@ -19,6 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Cookies } from "react-cookie";
+import { api_url } from "../api";
 
 export default function CheckoutPage() {
   const [address, setAddress] = useState("");
@@ -57,7 +58,7 @@ export default function CheckoutPage() {
 
       console.log("data", formData);
       const response = await axios.post(
-        "https://techegle-production.up.railway.app//orders/createOrder",
+        `${api_url}/orders/createOrder`,
         formData,
         {
           headers: {

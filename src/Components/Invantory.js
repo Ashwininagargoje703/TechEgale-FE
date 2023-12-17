@@ -15,6 +15,7 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
+import { api_url } from "../api";
 
 const Inventory = () => {
   const [data, setData] = useState([]);
@@ -33,15 +34,12 @@ const Inventory = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get(
-        "https://techegle-production.up.railway.app//products/getAllItems",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${api_url}/products/getAllItems`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.data && response.data.data) {
         setData(response.data.data);
@@ -68,7 +66,7 @@ const Inventory = () => {
     console.log("edit", data);
     try {
       const response = await axios.post(
-        "https://techegle-production.up.railway.app//products/updateInventroy",
+        `${api_url}/products/updateInventroy`,
         data,
         {
           headers: {

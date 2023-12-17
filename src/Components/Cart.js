@@ -4,6 +4,7 @@ import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { Grid, Card, Typography, Button, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { api_url } from "../api";
 
 const Cart = () => {
   const [data, setData] = useState([]);
@@ -34,15 +35,12 @@ const Cart = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get(
-        "https://techegle-production.up.railway.app/products/getUserCart",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${api_url}/products/getUserCart`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.data && response.data.data) {
         setData(response.data.data);
       }
@@ -53,15 +51,12 @@ const Cart = () => {
 
   const removeFromCart = async (id) => {
     try {
-      await axios.get(
-        `https://techegle-production.up.railway.app//products/removeCart?productId=${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.get(`${api_url}/products/removeCart?productId=${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       getData(); // Refresh cart items after removal
     } catch (error) {
       console.error("Error removing item from cart:", error);

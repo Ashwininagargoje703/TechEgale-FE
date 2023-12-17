@@ -1,64 +1,62 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import Navbar from "./Components/Navbar";
-import Home from "./Components/Home";
-import Register from "./Components/Register";
+import * as React from "react";
 import Login from "./Components/Login";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import Register from "./Components/Register";
+import Home from "./Components/Home";
+import { useCookies } from "react-cookie";
+import Inventory from "./Components/Invantory";
 import Cart from "./Components/Cart";
+import Navbar from "./Components/Navbar";
 import AddItemForm from "./AddProducts";
 import CheckoutPage from "./Components/CheckoutPage";
 import MyOrders from "./Components/MyOrders";
-import Inventory from "./Components/Invantory";
 import OrderDetails from "./Components/Oderdetails";
 
-function App() {
-  const [cookies, setCookie] = useCookies(["user"]);
-  const [isLogin, setLogin] = useState(false);
+// import Register from "./Components/Register";
 
-  useEffect(() => {
-    // Check if the user is logged in using cookies or your authentication mechanism
-    const isLoggedIn = cookies.isLoggedIn === "true";
-    setLogin(isLoggedIn);
-  }, [cookies]);
+function App() {
+  const [userName, setUserName] = useState("");
+  const [isLogin, setLogin] = useState(false);
+  const [cookies, setCookie] = useCookies(["user"]);
+  const navigate = useNavigate();
 
   return (
     <>
+      {/* <div style={{ width: "100%", border: "1px solid gray", height: "70px" }}>
+        <button onClick={() => navigate("/")}>Home</button>
+        <button onClick={() => navigate("/inventory")}>Inventory</button>
+        <button onClick={() => navigate("/cart")}>Cart</button>
+        <button
+          onClick={() => {
+            setCookie("serviceToken", "");
+            setCookie("userId", "");
+            setCookie("role", "");
+            setCookie("userName", "");
+            setCookie("name", "");
+            setCookie("isLoggedIn", "false");
+            setLogin(false);
+            navigate("/login");
+          }}
+        >
+          Logout
+        </button>
+      </div> */}
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/login"
-          element={isLogin ? <Navigate to="/" /> : <Login />}
-        />
-        {/* Protect the following routes by checking login status */}
-        <Route
-          path="/add-item"
-          element={isLogin ? <AddItemForm /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/inventory"
-          element={isLogin ? <Inventory /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/cart"
-          element={isLogin ? <Cart /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/my-orders"
-          element={isLogin ? <MyOrders /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/OrderDetails/:id"
-          element={isLogin ? <OrderDetails /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/checkout"
-          element={isLogin ? <CheckoutPage /> : <Navigate to="/login" />}
-        />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/add-item" element={<AddItemForm />} />
+        <Route path="/inventory" element={<Inventory />} />
+
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/OrderDetails/:id" element={<OrderDetails />} />
+
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </>
   );

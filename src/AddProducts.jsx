@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { Cookies } from "react-cookie";
+import { api_url } from "./api";
 
 const AddItemForm = () => {
   const cookie = new Cookies();
@@ -37,16 +38,12 @@ const AddItemForm = () => {
         quantity,
         price,
       };
-      await axios.post(
-        "https://techegle-production.up.railway.app//products/addItem",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.post(`${api_url}/products/addItem`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setOpenSnackbar(true);
       clearFields();
     } catch (error) {

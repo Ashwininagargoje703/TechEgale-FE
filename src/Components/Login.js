@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
+import { api_url } from "../api";
 
 const Login = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
@@ -18,10 +19,7 @@ const Login = () => {
       password,
     };
 
-    let userData = await axios.post(
-      `https://techegle-production.up.railway.app/admin/login`,
-      loginData
-    );
+    let userData = await axios.post(`${api_url}/admin/login`, loginData);
     console.log(userData.data.data);
 
     if (!userData.data.err) {

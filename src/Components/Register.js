@@ -7,6 +7,7 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GoogleIcon from "@mui/icons-material/Google";
+import { api_url } from "../api";
 
 const Register = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
@@ -29,10 +30,7 @@ const Register = () => {
         address,
         userType,
       };
-      let userData = await axios.post(
-        `https://techegle-production.up.railway.app/admin/register`,
-        data
-      );
+      let userData = await axios.post(`${api_url}/admin/register`, data);
 
       if (!userData.data.err) {
         toast.success("Registration Successful!", {

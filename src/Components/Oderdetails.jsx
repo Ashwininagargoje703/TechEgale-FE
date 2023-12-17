@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Typography, Card, CardContent, Grid, Box } from "@mui/material";
 import { Cookies } from "react-cookie";
+import { api_url } from "../api";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const OrderDetails = () => {
     const fetchOrderDetails = async () => {
       try {
         const response = await axios.get(
-          `https://techegle-production.up.railway.app//orders/getOrderDetails/${id}`,
+          `${api_url}/orders/getOrderDetails/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

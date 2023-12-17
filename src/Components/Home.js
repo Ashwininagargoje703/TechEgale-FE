@@ -15,6 +15,7 @@ import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { api_url } from "../api";
 
 export default function MultiActionAreaCard() {
   const [data, setData] = React.useState([]);
@@ -31,15 +32,12 @@ export default function MultiActionAreaCard() {
 
   const getData = async () => {
     try {
-      const response = await axios.get(
-        "https://techegle-production.up.railway.app/products/getAllItems",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${api_url}/products/getAllItems`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.data && response.data.data) {
         setData(response.data.data);
       }
@@ -50,15 +48,12 @@ export default function MultiActionAreaCard() {
 
   const addToCart = async (itemId) => {
     try {
-      await axios.get(
-        `https://techegle-production.up.railway.app/products/addItemToCart?productId=${itemId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.get(`${api_url}/products/addItemToCart?productId=${itemId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setSnackbarMessage("Successfully Added to cart");
       setSnackbarOpen(true);
     } catch (error) {
