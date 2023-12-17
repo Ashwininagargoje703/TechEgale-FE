@@ -7,6 +7,9 @@ import {
   Box,
   Snackbar,
   Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@mui/material";
 import axios from "axios";
 import { Cookies } from "react-cookie";
@@ -26,6 +29,7 @@ const AddItemForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [weightError, setWeightError] = useState(false);
   const [quantityError, setQuantityError] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,64 +80,77 @@ const AddItemForm = () => {
     setQuantityError(isNaN(value));
   };
 
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" align="center" gutterBottom>
+    <Container>
+      <Button onClick={handleOpenDialog} variant="contained" color="primary">
         Add New Item
-      </Typography>
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
-      >
-        <TextField
-          label="Product Name"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <TextField
-          label="Product Image URL"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
-        <TextField
-          label="Description"
-          value={productDescription}
-          onChange={(e) => setProductDescription(e.target.value)}
-        />
-        <TextField
-          label="Weight"
-          type="number"
-          value={weight}
-          onChange={handleWeightChange}
-          error={weightError}
-          helperText={weightError ? "Please enter a number" : ""}
-        />
-        <TextField
-          label="Quantity"
-          type="number"
-          value={quantity}
-          onChange={handleQuantityChange}
-          error={quantityError}
-          helperText={quantityError ? "Please enter a number" : ""}
-          required
-        />
-        <TextField
-          label="Price"
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Add Item
-        </Button>
-      </Box>
+      </Button>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Add New Item</DialogTitle>
+        <DialogContent>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <TextField
+              label="Product Name"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <TextField
+              label="Product Image URL"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+            />
+            <TextField
+              label="Description"
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
+            />
+            <TextField
+              label="Weight"
+              type="number"
+              value={weight}
+              onChange={handleWeightChange}
+              error={weightError}
+              helperText={weightError ? "Please enter a number" : ""}
+            />
+            <TextField
+              label="Quantity"
+              type="number"
+              value={quantity}
+              onChange={handleQuantityChange}
+              error={quantityError}
+              helperText={quantityError ? "Please enter a number" : ""}
+              required
+            />
+            <TextField
+              label="Price"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+            <Button type="submit" variant="contained" color="primary">
+              Add Item
+            </Button>
+          </Box>
+        </DialogContent>
+      </Dialog>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

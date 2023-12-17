@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { api_url } from "../Api/api";
 
@@ -19,25 +20,33 @@ const Login = () => {
       password,
     };
 
-    let userData = await axios.post(`${api_url}/admin/login`, loginData);
-    console.log(userData.data.data);
+    try {
+      let userData = await axios.post(`${api_url}/admin/login`, loginData);
+      console.log(userData.data);
 
-    if (!userData.data.err) {
-      console.log("hit here only", userData.data);
-      setCookie("serviceToken", userData.data.msg.token);
-      setCookie("userId", userData.data.msg.userId);
-      setCookie("role", userData.data.msg.role);
-      setCookie("userName", userData.data.msg.phoneNumber);
-      setCookie("name", userData.data.msg.name);
-      setCookie("isLoggedIn", "true");
-      navigate("/");
+      if (userData.data.msg === "Invalid credentials") {
+        toast.error("Invalid credentials. Please try again.", {
+          autoClose: 3000,
+        });
+      } else {
+        setCookie("serviceToken", userData.data.msg.token);
+        setCookie("userId", userData.data.msg.userId);
+        setCookie("role", userData.data.msg.role);
+        setCookie("userName", userData.data.msg.phoneNumber);
+        setCookie("name", userData.data.msg.name);
+        setCookie("isLoggedIn", "true");
+        navigate("/home");
+        toast.success("Login successful!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred. Please try again.");
     }
-
-    alert(userData.data.msg);
   };
 
   return (
     <div className="login-container">
+      <ToastContainer />
       <div className="logo-wrapper">
         <img
           src="https://res.cloudinary.com/zoominfo-com/image/upload/w_140,h_140,c_fit/techeagle.in"

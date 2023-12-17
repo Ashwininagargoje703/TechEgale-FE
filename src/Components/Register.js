@@ -30,31 +30,27 @@ const Register = () => {
         address,
         userType,
       };
+      console.log("user data", data);
       let userData = await axios.post(`${api_url}/admin/register`, data);
 
       if (!userData.data.err) {
         toast.success("Registration Successful!", {
-          position: "top-right",
           autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+          onClose: () => {
+            setCookie("userType", userType); // Set userType in cookies upon successful registration
+            navigate("/login");
+          },
         });
-        navigate("/login");
+      } else {
+        toast.error("Registration Failed. Please try again.", {
+          autoClose: 3000,
+        });
       }
     } catch (error) {
-      toast.error("Registration Failed. Please try again.", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
       console.error("Registration error:", error);
+      toast.error("An error occurred during registration. Please try again.", {
+        autoClose: 3000,
+      });
     }
   };
 
@@ -63,6 +59,7 @@ const Register = () => {
       <div
         style={{
           height: 100,
+          marginBottom: 10,
         }}
       >
         <img
@@ -132,9 +129,9 @@ const Register = () => {
             Customer
           </ToggleButton>
           <ToggleButton
-            value="Manager"
+            value="manager"
             style={
-              userType === "Manager"
+              userType === "manager"
                 ? { backgroundColor: "blue", color: "white" }
                 : {}
             }

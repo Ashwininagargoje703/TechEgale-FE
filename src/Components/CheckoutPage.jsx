@@ -30,7 +30,6 @@ export default function CheckoutPage() {
   const [pincode, setPincode] = useState("");
   const cookie = new Cookies();
   const token = cookie.get("serviceToken");
-  const location = useLocation();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -81,15 +80,28 @@ export default function CheckoutPage() {
       <ToastContainer />
       <Container
         sx={{
-          minHeight: "100vh",
           padding: 4,
           display: "flex",
-          justifyContent: "center",
         }}
       >
-        <Paper elevation={3} sx={{ width: 600 }}>
+        <Box sx={{ width: "50%" }}>
+          <img
+            src="https://www.marketing91.com/wp-content/uploads/2022/03/How-does-Cash-on-Delivery-Work.jpg"
+            alt="Cash On Delivery"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </Box>
+        <Paper elevation={3} sx={{ width: "50%", padding: 4 }}>
           <Box>
-            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                mb: 2,
+                fontSize: 20,
+                fontWeight: 600,
+              }}
+            >
               Cash On Delivery
             </Box>
 

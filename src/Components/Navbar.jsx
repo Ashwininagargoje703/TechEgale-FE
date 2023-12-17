@@ -79,7 +79,7 @@ const Navbar = () => {
                 onKeyDown={toggleDrawer(false)}
               >
                 <List>
-                  <ListItem button onClick={() => navigate("/")}>
+                  <ListItem button onClick={() => navigate("/home")}>
                     <ListItemText primary="Home" />
                   </ListItem>
                   <ListItem button onClick={() => navigate("/inventory")}>

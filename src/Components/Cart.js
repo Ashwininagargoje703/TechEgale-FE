@@ -86,103 +86,142 @@ const Cart = () => {
           <Typography variant="h4" gutterBottom>
             Your Cart
           </Typography>
-          {data.map((item, index) => (
-            <Card
-              sx={{
-                display: "flex",
-                marginBottom: "20px", // Add margin bottom to create gap
-                width: "100%",
-              }}
-              key={item._id}
-            >
-              <Box sx={{ width: 200, height: 100 }}>
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  style={{
-                    width: 200,
-                    height: 200,
-                    maxHeight: "100%",
-                    maxWidth: "100%",
-                  }}
-                />
-              </Box>
-              <Box
+          {data.length === 0 ? (
+            <Box>
+              <Typography variant="subtitle1">Your cart is empty.</Typography>
+              <img
+                src="https://cdn.dribbble.com/users/5107895/screenshots/14532312/media/a7e6c2e9333d0989e3a54c95dd8321d7.gif"
+                alt="Empty Cart"
+                style={{ width: "100%", height: "70vh" }}
+              />
+            </Box>
+          ) : (
+            data.map((item, index) => (
+              <Card
                 sx={{
                   display: "flex",
+                  marginBottom: "20px", // Add margin bottom to create gap
                   width: "100%",
-                  justifyContent: "space-between",
-                  p: 2,
                 }}
+                key={item._id}
               >
-                <Typography variant="subtitle1" fontWeight={600}>
-                  {item.title.substring(0, 25)}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  Rs. {item.price.toFixed(2)}
-                </Typography>
+                <Box sx={{ width: 200, height: 100 }}>
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    style={{
+                      width: 200,
+                      height: 200,
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                    }}
+                  />
+                </Box>
                 <Box
                   sx={{
                     display: "flex",
-                    alignItems: "center",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    height: 30,
+                    width: "100%",
+                    justifyContent: "space-between",
+                    p: 2,
                   }}
                 >
-                  <Button
-                    onClick={() => handleDecrement(index)}
+                  <Typography variant="subtitle1" fontWeight={600}>
+                    {item.title.substring(0, 25)}
+                  </Typography>
+                  <Typography variant="subtitle1" color="text.secondary">
+                    Rs. {item.price.toFixed(2)}
+                  </Typography>
+                  <Box
                     sx={{
-                      borderRadius: "0",
-                      width: 10,
+                      display: "flex",
+                      alignItems: "center",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                      height: 30,
                     }}
                   >
-                    -
-                  </Button>
-                  <Typography variant="body1">{item.quantity}</Typography>
+                    <Button
+                      onClick={() => handleDecrement(index)}
+                      sx={{
+                        borderRadius: "0",
+                        width: 10,
+                      }}
+                    >
+                      -
+                    </Button>
+                    <Typography variant="body1">{item.quantity}</Typography>
+                    <Button
+                      onClick={() => handleIncrement(index)}
+                      sx={{
+                        borderRadius: "0",
+                        width: 10,
+                      }}
+                    >
+                      +
+                    </Button>
+                  </Box>
                   <Button
-                    onClick={() => handleIncrement(index)}
-                    sx={{
-                      borderRadius: "0",
-                      width: 10,
-                    }}
+                    onClick={() => removeFromCart(item._id)}
+                    sx={{ height: 25 }}
                   >
-                    +
+                    <DeleteIcon />
                   </Button>
                 </Box>
-                <Button
-                  onClick={() => removeFromCart(item._id)}
-                  sx={{ height: 25 }}
-                >
-                  <DeleteIcon />
-                </Button>
-              </Box>
-            </Card>
-          ))}
+              </Card>
+            ))
+          )}
         </Grid>
-        {/* Right Side: Total Quantity and Place Order Button */}
-        <Grid item xs={4}>
-          <Card
-            sx={{
-              p: 4,
-              justifyContent: "center",
-              display: "grid",
-              mt: 7,
-            }}
-          >
-            <Typography variant="h6" gutterBottom>
-              Total Quantity: Rs {getTotalPrice().toFixed(2)}
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginTop: "20px" }}
-              onClick={Checkout}
+        {data.length === 0 ? (
+          <Grid item xs={4}>
+            <Card
+              sx={{
+                p: 4,
+                justifyContent: "center",
+                display: "grid",
+                mt: 7,
+              }}
             >
-              checkout
-            </Button>
-          </Card>
-        </Grid>
+              <img
+                src="https://coralwebconcept.com/wp-content/uploads/2021/11/cart-abandonment.jpg"
+                alt="img"
+                style={{
+                  width: "80%",
+                }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginTop: "20px", height: 50 }}
+                onClick={() => navigate("/home")}
+              >
+                Continue Shopping
+              </Button>
+            </Card>
+          </Grid>
+        ) : (
+          <Grid item xs={4}>
+            <Card
+              sx={{
+                p: 4,
+                justifyContent: "center",
+                display: "grid",
+                mt: 7,
+              }}
+            >
+              <Typography variant="h6" gutterBottom>
+                Total Quantity: Rs {getTotalPrice().toFixed(2)}
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginTop: "20px" }}
+                onClick={Checkout}
+              >
+                checkout
+              </Button>
+            </Card>
+          </Grid>
+        )}
       </Grid>
     </div>
   );

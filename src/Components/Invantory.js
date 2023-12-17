@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Cookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 import {
   Table,
   TableHead,
@@ -13,20 +12,22 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  Box,
 } from "@mui/material";
 import axios from "axios";
 import { api_url } from "../Api/api";
+import EditIcon from "@mui/icons-material/Edit";
+import AddItemForm from "../AddProducts";
 
 const Inventory = () => {
   const [data, setData] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [editItemQuantity, setEditItemQuantity] = useState(0);
   const [openDialog, setOpenDialog] = useState(false);
-
   const cookie = new Cookies();
-  const userId = cookie.get("userId");
+  const userType = cookie.get("userType");
   const token = cookie.get("serviceToken");
-  const navigate = useNavigate();
+  console.log("usertype", userType);
 
   useEffect(() => {
     getData();
@@ -55,19 +56,17 @@ const Inventory = () => {
     setOpenDialog(true);
   };
   const handleSaveQuantity = async () => {
-    const data = {
-      products: [
-        {
-          _id: selectedItemId,
-          quantity: editItemQuantity,
-        },
-      ],
-    };
-    console.log("edit", data);
     try {
+      const updatedProduct = {
+        _id: selectedItemId,
+        quantity: Number(editItemQuantity),
+      };
+
+      console.log("Updated Product:", updatedProduct);
+
       const response = await axios.post(
-        `${api_url}/products/updateInventroy`,
-        data,
+        `${api_url}/products/updateInventory`,
+        updatedProduct,
         {
           headers: {
             "Content-Type": "application/json",
@@ -79,11 +78,11 @@ const Inventory = () => {
       if (response.status === 200) {
         console.log("Quantity updated successfully!");
         handleCloseDialog();
+        getData(); // Refresh data after successful update
       }
     } catch (error) {
       console.error("Error updating quantity:", error);
     }
-    getData();
   };
 
   const handleCloseDialog = () => {
@@ -94,6 +93,18 @@ const Inventory = () => {
 
   return (
     <div className="table-container">
+      {userType === "manager" && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            float: "right",
+            mb: 2,
+          }}
+        >
+          <AddItemForm />
+        </Box>
+      )}
       <Table>
         <TableHead>
           <TableRow>
@@ -101,7 +112,7 @@ const Inventory = () => {
             <TableCell>Name</TableCell>
             <TableCell>Price</TableCell>
             <TableCell>Quantity</TableCell>
-            <TableCell>Action</TableCell>
+            {userType === "manager" && <TableCell>Acti</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -111,13 +122,19 @@ const Inventory = () => {
               <TableCell>{item.title}</TableCell>
               <TableCell>Rs {item.price.toFixed(2)}</TableCell>
               <TableCell>{item.quantity}</TableCell>
-              <TableCell>
-                <Button
-                  onClick={() => handleEditQuantity(item._id, item.quantity)}
-                >
-                  Edit Quantity
-                </Button>
-              </TableCell>
+              {userType === "manager" && (
+                <TableCell>
+                  <Button
+                    onClick={() => handleEditQuantity(item._id, item.quantity)}
+                    sx={{
+                      textTransform: "none",
+                    }}
+                  >
+                    <EditIcon />
+                    Update Invantory
+                  </Button>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>
