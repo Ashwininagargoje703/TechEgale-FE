@@ -15,7 +15,7 @@ import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 export default function MultiActionAreaCard() {
   const [data, setData] = React.useState([]);

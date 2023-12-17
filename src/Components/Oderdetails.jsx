@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Typography, Card, CardContent, Grid, Box } from "@mui/material";
 import { Cookies } from "react-cookie";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 const OrderDetails = () => {
   const { id } = useParams();

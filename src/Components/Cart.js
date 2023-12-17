@@ -4,7 +4,7 @@ import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { Grid, Card, Typography, Button, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 const Cart = () => {
   const [data, setData] = useState([]);

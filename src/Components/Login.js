@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 
 import { Link, useNavigate } from "react-router-dom";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 const Login = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");

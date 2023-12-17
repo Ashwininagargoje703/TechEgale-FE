@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);

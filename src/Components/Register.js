@@ -7,7 +7,7 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GoogleIcon from "@mui/icons-material/Google";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 const Register = () => {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");

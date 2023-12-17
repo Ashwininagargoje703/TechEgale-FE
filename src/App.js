@@ -24,25 +24,6 @@ function App() {
 
   return (
     <>
-      {/* <div style={{ width: "100%", border: "1px solid gray", height: "70px" }}>
-        <button onClick={() => navigate("/")}>Home</button>
-        <button onClick={() => navigate("/inventory")}>Inventory</button>
-        <button onClick={() => navigate("/cart")}>Cart</button>
-        <button
-          onClick={() => {
-            setCookie("serviceToken", "");
-            setCookie("userId", "");
-            setCookie("role", "");
-            setCookie("userName", "");
-            setCookie("name", "");
-            setCookie("isLoggedIn", "false");
-            setLogin(false);
-            navigate("/login");
-          }}
-        >
-          Logout
-        </button>
-      </div> */}
       <Navbar />
 
       <Routes>

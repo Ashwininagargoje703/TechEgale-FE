@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Cookies } from "react-cookie";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 export default function CheckoutPage() {
   const [address, setAddress] = useState("");

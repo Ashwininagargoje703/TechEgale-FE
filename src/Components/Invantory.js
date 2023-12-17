@@ -15,7 +15,7 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
-import { api_url } from "../api";
+import { api_url } from "../Api/api";
 
 const Inventory = () => {
   const [data, setData] = useState([]);

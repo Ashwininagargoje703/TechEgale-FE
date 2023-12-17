@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { Cookies } from "react-cookie";
-import { api_url } from "./api";
+import { api_url } from "./Api/api";
 
 const AddItemForm = () => {
   const cookie = new Cookies();
