@@ -110,9 +110,7 @@ const Navbar = () => {
             <Button color="inherit" onClick={() => navigate("/my-orders")}>
               MyOrder
             </Button>
-            <Button color="inherit" onClick={() => navigate("/checkout")}>
-              Checkout
-            </Button>
+
             <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
