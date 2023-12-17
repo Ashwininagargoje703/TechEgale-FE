@@ -98,7 +98,7 @@ const Navbar = () => {
         ) : (
           // Render desktop view of the navbar
           <>
-            <Button color="inherit" onClick={() => navigate("/")}>
+            <Button color="inherit" onClick={() => navigate("/home")}>
               Home
             </Button>
             <Button color="inherit" onClick={() => navigate("/inventory")}>
