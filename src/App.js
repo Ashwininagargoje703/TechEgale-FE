@@ -13,6 +13,7 @@ import AddItemForm from "./AddProducts";
 import CheckoutPage from "./Components/CheckoutPage";
 import MyOrders from "./Components/MyOrders";
 import OrderDetails from "./Components/Oderdetails";
+import PlacedOrderSuccessful from "./Components/OrderPlace";
 
 // import Register from "./Components/Register";
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/OrderDetails/:id" element={<OrderDetails />} />
 
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order-place" element={<PlacedOrderSuccessful />} />
       </Routes>
     </>
   );

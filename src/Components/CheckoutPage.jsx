@@ -30,6 +30,7 @@ export default function CheckoutPage() {
   const [pincode, setPincode] = useState("");
   const cookie = new Cookies();
   const token = cookie.get("serviceToken");
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -69,6 +70,7 @@ export default function CheckoutPage() {
 
       console.log("Order placed successfully:", response.data);
       toast.success("Order placed successfully!");
+      navigate("/order-place");
     } catch (error) {
       console.error("Error placing the order:", error.message);
       toast.error("Failed to place the order. Please try again.");
